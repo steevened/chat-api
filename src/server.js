@@ -1,10 +1,10 @@
 const app = require('./app');
 require('dotenv').config();
+const logger = require('./utils/logger');
 const swaggerDocs = require('../swagger');
+const config = require('./utils/config');
 
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  swaggerDocs(app, PORT);
+app.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`);
+  swaggerDocs(app, config.PORT);
 });

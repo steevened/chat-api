@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const config = require('../utils/config');
 
 const models = require('../models');
 
@@ -22,7 +23,7 @@ class AuthServices {
         where: { email },
       });
       if (user) {
-        const isValid = bcrypt.compareSync(password, user.password);
+        const isValid = bcrypt.compare(password, user.password);
         return isValid ? { isValid, user } : { isValid };
       }
       return { isValid: false };
@@ -32,7 +33,7 @@ class AuthServices {
   }
   static genToken(data) {
     try {
-      const token = jwt.sign(data, process.env.JWT_SECRET, {
+      const token = jwt.sign(data, config.JWT_SECRET, {
         // expiresIn: '10m',
         algorithm: 'HS512',
       });

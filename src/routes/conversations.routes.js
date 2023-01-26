@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { userExtractor, tokenExtractor } = require('../utils/middleware');
 
 const {
   createConversation,
@@ -6,6 +7,7 @@ const {
 
 const router = Router();
 
-router.post('/conversations', createConversation);
+// router.post('/conversations', userExtractor, createConversation);
+router.post('/conversations', userExtractor, createConversation);
 
 module.exports = router;

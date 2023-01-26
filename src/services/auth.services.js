@@ -23,7 +23,7 @@ class AuthServices {
         where: { email },
       });
       if (user) {
-        const isValid = bcrypt.compare(password, user.password);
+        const isValid = bcrypt.compareSync(password, user.password);
         return isValid ? { isValid, user } : { isValid };
       }
       return { isValid: false };

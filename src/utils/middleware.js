@@ -1,5 +1,6 @@
 const logger = require('./logger');
 const jwt = require('jsonwebtoken');
+const config = require('../utils/config');
 
 const requestLogger = (req, res, next) => {
   logger.info('Method:', req.method);
@@ -29,7 +30,7 @@ const errorHandler = (error, req, res, next) => {
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization');
 
-  if (authorization && authorization.startsWith('Bearer ')) {
+  if (authorization && authorization.startsWith('Bearer')) {
     const token = authorization.replace('Bearer ', '');
     req.token = token;
   }
@@ -37,7 +38,7 @@ const tokenExtractor = (req, res, next) => {
 };
 
 const userExtractor = (req, res, next) => {
-  const decodedToken = jwt.verify(req.token, process.env.SECRET);
+  const decodedToken = jwt.verify(req.token, config.JWT_SECRET);
 
   if (!decodedToken.id) {
     return res.status(401).json({ error: 'token missing or invalid' });

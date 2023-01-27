@@ -36,7 +36,7 @@ const register = async (req, res, next) => {
       res.status(400).json({ message: 'something wrong' });
     }
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 

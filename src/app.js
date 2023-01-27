@@ -12,8 +12,8 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(middleware.tokenExtractor);
 routerApi(app);
-// app.use(middleware.errorHandler);
-app.use(error());
-app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+// app.use(error);
+// app.use(middleware.unknownEndpoint);
 
 module.exports = app;

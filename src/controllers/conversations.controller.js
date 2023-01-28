@@ -35,4 +35,14 @@ const createConversation = async (req, res) => {
   }
 };
 
-module.exports = { createConversation };
+const getUserConversation = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await conversationServices.getUserConversation(id);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createConversation, getUserConversation };

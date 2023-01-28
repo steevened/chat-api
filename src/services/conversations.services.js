@@ -28,6 +28,17 @@ class conversationServices {
       throw error;
     }
   }
+
+  static async getUserConversation(id) {
+    try {
+      const conversation = await conversations.findAll({
+        where: { created_by: id },
+      });
+      return conversation;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = conversationServices;
